@@ -8,6 +8,7 @@ import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMethod.*;
 import org.springframework.web.servlet.DispatcherServlet;
+import rest.client.AuthorizationException;
 import rest.client.TweetFetchException;
 import rest.client.TwitterApi;
 import rest.service.entity.Tweet;
@@ -34,7 +35,10 @@ public class TweetService {
         try {
             int numberOfTweets = Integer.parseInt(tweetCount);
             return TwitterApi.getInstance().getTweets(screenName,numberOfTweets);
-        } catch (TweetFetchException tfe) {
+        } catch (AuthorizationException ae) {
+            throw new WebApplicationException("Problem authenticating: " + ae.getMessage());
+        }
+        catch (TweetFetchException tfe) {
             throw new WebApplicationException("Could not fetch tweets: " + tfe.getMessage());
         } catch (NumberFormatException nfe) {
             throw new BadRequestException("Tweet count must be a number... you put:" + tweetCount);

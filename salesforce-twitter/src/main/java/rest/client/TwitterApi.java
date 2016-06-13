@@ -69,6 +69,7 @@ public class TwitterApi {
     public boolean authenticate() {
         //use environment variables
         if (null == System.getenv(ENV_CONSUMER_KEY) || null == System.getenv(ENV_CONSUMER_SECRET)) {
+            System.out.println("Environment variables " + ENV_CONSUMER_KEY + " and/or " + ENV_CONSUMER_SECRET + " are not set.");
             return false;
         }
         return authenticate(System.getenv(ENV_CONSUMER_KEY),System.getenv(ENV_CONSUMER_SECRET));
@@ -99,6 +100,7 @@ public class TwitterApi {
                 //System.out.println("Success: " + response.readEntity(String.class));
                 TwitterAuthorizationResponse tar = response.readEntity(TwitterAuthorizationResponse.class);
                 bearerToken = tar.getAccessToken();
+                System.out.println("Authentication successful");
                 return true;
             } else {
                 System.out.println("Status code for auth: " + response.getStatusInfo().getStatusCode() + ": " + response.getStatusInfo().getReasonPhrase());

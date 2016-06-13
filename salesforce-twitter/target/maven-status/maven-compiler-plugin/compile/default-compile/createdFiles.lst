@@ -1,0 +1,9 @@
+rest/client/AuthorizationException.class
+rest/client/TweetFetchException.class
+rest/client/entity/TwitterAuthorizationResponse.class
+rest/client/TwitterApi$1.class
+rest/client/TwitterApi.class
+rest/service/entity/Tweet.class
+rest/service/entity/Tweet$User.class
+rest/service/TweetService.class
+rest/client/entity/TwitterTimelineResponse.class
