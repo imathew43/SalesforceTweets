@@ -47,11 +47,7 @@ public class TwitterApi {
     private WebTarget baseTarget;
 
     private static TwitterApi instance = null;
-
-   /* public static void main(String[] args) {
-        TwitterApi inst = getInstance();
-        System.out.println(instance.bearerToken);
-    }*/
+    
 
     public static TwitterApi getInstance() {
         if (instance == null) {
@@ -122,8 +118,8 @@ public class TwitterApi {
         Response response = request.invoke();
         if (response.getStatusInfo().getStatusCode() == 200) {
             List<Tweet> tweets = response.readEntity(new GenericType<List<Tweet>>() {});
-            if (tweetCount >= tweets.size()) {
-                tweetCount = tweets.size() -1;
+            if (tweetCount > tweets.size()) {
+                tweetCount = tweets.size();
             }
             tweets = tweets.subList(0, tweetCount);
             return tweets;
